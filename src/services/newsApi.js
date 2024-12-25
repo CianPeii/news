@@ -47,7 +47,11 @@ export const getCountryNews = async (countryName) => {
 // 取得類別頭條新聞
 export const getCategoryNews = async (category) => {
   try {
-    const response = await newsApi.get("/category");
+    const response = await newsApi.get(`/category`, {
+      params: {
+        category: category,
+      },
+    });
     return response.data.sources;
   } catch (error) {
     console.error(`無法取得 ${category} 的新聞:`, error);
