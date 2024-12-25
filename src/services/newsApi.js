@@ -23,7 +23,6 @@ export const getTopHeadlines = async () => {
     return response.data;
   } catch (error) {
     console.error("取得頭條新聞時發生錯誤:", error);
-    throw error;
   }
 };
 
@@ -41,6 +40,17 @@ export const getCountryNews = async (countryName) => {
     return response.data.articles;
   } catch (error) {
     console.error(`無法取得 ${countryName} 的新聞:`, error);
+    return [];
+  }
+};
+
+// 取得類別頭條新聞
+export const getCategoryNews = async (category) => {
+  try {
+    const response = await newsApi.get("/category");
+    return response.data.sources;
+  } catch (error) {
+    console.error(`無法取得 ${category} 的新聞:`, error);
     return [];
   }
 };
