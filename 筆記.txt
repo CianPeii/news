@@ -1,0 +1,32 @@
+src/assets/ 資料夾：
+會被構建工具（Vite/Webpack）處理和優化
+適合放置：
+    需要被打包和優化的圖片
+    需要通過 import 引入的資源
+    CSS、SCSS 檔案
+    字型檔案
+使用方式：
+import logo from '../assets/images/logo.png';
+
+function App() {
+  return <img src={logo} alt="logo" />;
+}
+
+public/ 資料夾：
+直接複製到構建輸出目錄，不會被處理
+適合放置：
+    favicon.ico
+    robots.txt
+    大型圖片/媒體檔案
+    需要保持原始檔名的檔案
+    需要通過絕對路徑訪問的資源
+使用方式：
+function App() {
+  return <img src="/logo.png" alt="logo" />;
+}
+
+使用建議：
+    如果資源需要被打包和優化，放在 assets
+    如果資源需要保持原樣或通過絕對路徑訪問，放在 public
+    小型圖片放 assets，大型媒體檔案放 public
+    經常變動的資源放 assets，較少變動的放 public
