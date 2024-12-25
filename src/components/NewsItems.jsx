@@ -51,7 +51,7 @@ function NewsItems({ article, isBookmarked, onBookmarkToggle }) {
       {/* 新聞圖片 */}
       <div className="h-60">
         <img
-          className="w-full h-full object-cover object-center "
+          className="w-full h-full object-cover object-center"
           src={article.urlToImage || placeholderImg}
           alt={article.title}
           onError={(e) => {
