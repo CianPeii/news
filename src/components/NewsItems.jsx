@@ -1,10 +1,19 @@
 import formatDate from "../utils/helpers";
 import PropTypes from "prop-types";
 import placeholderImg from "../assets/images/placeholder.jpg";
+import { useNavigate } from "react-router-dom";
 
 function NewsItems({ article, isBookmarked, onBookmarkToggle }) {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/article/${encodeURIComponent(article.title)}`, {
+      state: { article },
+    });
+  };
+
   return (
-    <div className="relative bg-gray-100">
+    <div className="relative bg-gray-100" onClick={handleCardClick}>
       {/* 書籤和分享按鈕 */}
       <div className="absolute top-0 right-0 flex justify-end space-x-3 px-3 py-2">
         <button
