@@ -9,13 +9,16 @@ function Search() {
     <>
       <Header />
       <Navbar />
-      <div>
+      <div className="py-6 px-8">
         <h1 className="flex items-center gap-2">
-          Search
+          CopySearch Results for
           <span className="text-blue-500 italic">{keyword}</span>
-          results:
+          {"這裡放共幾筆變數"} matching entries
         </h1>
-        <div className="bg-gray-200 w-20 h-20">新聞卡</div>
+      </div>
+      {/* 新聞卡片 */}
+      <div className="py-6 px-8 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-4 px-6">
+        新聞卡片
       </div>
     </>
   );
