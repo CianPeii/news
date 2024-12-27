@@ -1,5 +1,6 @@
 import { Search } from "lucide-react";
 import { NavLink } from "react-router";
+import { useState } from "react";
 
 function Navbar() {
   const categoryTypes = [
@@ -11,6 +12,11 @@ function Navbar() {
     "science",
     "health",
   ];
+  const [inputValue, setInputValue] = useState("");
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+    console.log(inputValue);
+  };
 
   return (
     <>
@@ -39,8 +45,12 @@ function Navbar() {
             className="bg-transparent outline-none placeholder-gray-400 w-48 text-sm"
             type="text"
             placeholder="Search"
+            onChange={handleInputChange}
           />
-          <button className="p-1 hover:bg-gray-200 rounded-full transition-colors duration-200">
+          <button
+            onClick={() => console.log(inputValue)}
+            className="p-1 hover:bg-gray-200 rounded-full transition-colors duration-200"
+          >
             <Search size={20} className="text-gray-500" />
           </button>
         </div>
