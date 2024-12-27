@@ -1,7 +1,7 @@
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
-import { getTopHeadlines, getCountryNews } from "../services/newsApi";
+import { getTopHeadlines, searchNews } from "../services/newsApi";
 import Loading from "../components/Loading";
 import NewsCard from "../components/NewsCard";
 
@@ -65,7 +65,7 @@ function Home() {
       setCountryLoading(true);
       try {
         const newsPromises = nations.map(async ({ nation }) => {
-          const articles = await getCountryNews(nation);
+          const articles = await searchNews(nation);
           return { nation, articles };
         });
 

@@ -27,11 +27,13 @@ export const getTopHeadlines = async () => {
 };
 
 // 取得各國新聞
-export const getCountryNews = async (countryName) => {
+// countryName => keyword
+// getCountryNews =>  searchNews
+export const searchNews = async (keyword) => {
   try {
     const response = await newsApi.get(`/everything`, {
       params: {
-        q: countryName,
+        q: keyword,
         language: "en",
         sortBy: "publishedAt", // 依發布時間排序
         pageSize: 8,
@@ -39,7 +41,7 @@ export const getCountryNews = async (countryName) => {
     });
     return response.data.articles;
   } catch (error) {
-    console.error(`無法取得 ${countryName} 的新聞:`, error);
+    console.error(`無法取得 ${keyword} 的新聞:`, error);
     return [];
   }
 };
