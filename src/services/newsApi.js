@@ -2,8 +2,8 @@ import axios from "axios";
 
 const API_KEY = "9d1276ca6b2d415e98f754e7b3f3ec31";
 // "4b20f9e738f5452a99c1710935e7b294";
-const BASE_URL = "https://newsapi.org/v2";
 
+const BASE_URL = "https://newsapi.org/v2";
 const newsApi = axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -47,14 +47,17 @@ export const getCountryNews = async (countryName) => {
 // 取得類別頭條新聞
 export const getCategoryNews = async (category) => {
   try {
-    const response = await newsApi.get(`/category`, {
+    const response = await newsApi.get(`/top-headlines`, {
       params: {
-        category: category,
+        category,
+        language: "en",
+        sortBy: "publishedAt",
+        country: "us",
       },
     });
-    return response.data.sources;
+    return response.data.articles;
   } catch (error) {
-    console.error(`無法取得 ${category} 的新聞:`, error);
+    console.error(`無法取得 ${category} 類別的新聞:`, error);
     return [];
   }
 };
