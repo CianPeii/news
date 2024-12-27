@@ -13,9 +13,9 @@ function NewsItems({ article, isBookmarked, onBookmarkToggle }) {
   };
 
   return (
-    <div className="relative bg-gray-100" onClick={handleCardClick}>
+    <div className="relative bg-gray-100">
       {/* 書籤和分享按鈕 */}
-      <div className="absolute top-0 right-0 flex justify-end space-x-3 px-3 py-2">
+      <div className="absolute top-0 right-0 flex justify-end space-x-3 px-3 py-2 ">
         <button
           className="bg-[#F5F5F5] rounded-full p-1 hover:bg-[#8E8E93]"
           onClick={() => onBookmarkToggle(article.url)}
@@ -56,25 +56,26 @@ function NewsItems({ article, isBookmarked, onBookmarkToggle }) {
           </svg>
         </button>
       </div>
+      <div onClick={handleCardClick}>
+        {/* 新聞圖片 */}
+        <div className="h-60">
+          <img
+            className="w-full h-full object-cover object-center"
+            src={article.urlToImage || placeholderImg}
+            alt={article.title}
+            onError={(e) => {
+              e.target.src = placeholderImg;
+            }}
+          />
+        </div>
 
-      {/* 新聞圖片 */}
-      <div className="h-60">
-        <img
-          className="w-full h-full object-cover object-center"
-          src={article.urlToImage || placeholderImg}
-          alt={article.title}
-          onError={(e) => {
-            e.target.src = placeholderImg;
-          }}
-        />
-      </div>
-
-      {/* 新聞標題和日期 */}
-      <div className="px-4 space-y-2 py-3">
-        <h3 className="text-xl font-semibold truncate">{article.title}</h3>
-        <p className="text-base text-gray-500">
-          {formatDate(article.publishedAt)}
-        </p>
+        {/* 新聞標題和日期 */}
+        <div className="px-4 space-y-2 py-3">
+          <h3 className="text-xl font-semibold truncate">{article.title}</h3>
+          <p className="text-base text-gray-500">
+            {formatDate(article.publishedAt)}
+          </p>
+        </div>
       </div>
     </div>
   );
