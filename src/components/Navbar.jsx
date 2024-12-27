@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Navbar() {
-  const categoryTypes = [
+  const categories = [
     "general",
     "business",
     "technology",
@@ -34,10 +34,10 @@ function Navbar() {
       <nav className="flex justify-between items-center px-6 py-3 bg-blue-400 shadow-sm rounded-lg mx-4 my-2">
         {/* 類別選單區域 */}
         <div className="flex space-x-6 overflow-x-auto">
-          {categoryTypes.map((type) => (
+          {categories.map((category) => (
             <NavLink
-              key={type}
-              to={`/${type}`}
+              key={category}
+              to={`/${category}`}
               className={({ isActive }) => `
         px-4 py-2 text-white rounded-md transition-all duration-200 
         whitespace-nowrap font-medium text-base 
@@ -45,7 +45,7 @@ function Navbar() {
         ${isActive ? "underline" : ""}
       `}
             >
-              {type.toUpperCase()}
+              {category.toUpperCase()}
             </NavLink>
           ))}
         </div>
