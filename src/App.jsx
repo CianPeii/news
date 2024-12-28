@@ -1,5 +1,5 @@
 import Home from "./pages/Home";
-import NewsCategory from "./pages/NewsCategory";
+import Category from "./pages/Category";
 import ArticleDetail from "./pages/ArticleDetail";
 import Search from "./pages/Search";
 import {} from "react-router";
@@ -53,7 +53,8 @@ function App() {
     if (!validCategories.includes(category)) {
       return <Navigate to="/" replace />;
     }
-    return <NewsCategory />;
+
+    return <Category />;
   }
   return;
 }

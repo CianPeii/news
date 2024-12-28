@@ -14,7 +14,7 @@ import NewsItems from "../components/NewsItems";
 import { getCategoryNews } from "../services/newsApi";
 import { useEffect, useState } from "react";
 
-function NewsCategory() {
+function Category() {
   // 需要狀態管理的部分
   // 書籤管理
   const [checkedItems, setCheckedItems] = useState(() => {
@@ -72,7 +72,6 @@ function NewsCategory() {
       }
     };
 
-    // 調用函數
     fetchCategoryNews();
   }, [category]);
 
@@ -117,4 +116,4 @@ function NewsCategory() {
   );
 }
 
-export default NewsCategory;
+export default Category;
