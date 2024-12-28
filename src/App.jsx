@@ -2,23 +2,59 @@ import Home from "./pages/Home";
 import NewsCategory from "./pages/NewsCategory";
 import ArticleDetail from "./pages/ArticleDetail";
 import Search from "./pages/Search";
-
+import {} from "react-router";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useParams,
+  Navigate,
+} from "react-router";
+import PropTypes from "prop-types";
 
+const validCategories = [
+  "general",
+  "business",
+  "technology",
+  "entertainment",
+  "sports",
+  "science",
+  "health",
+];
 function App() {
   const root = document.getElementById("root");
+
   ReactDOM.createRoot(root).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/:category" element={<NewsCategory />} />
+        <Route
+          path="/category/:category"
+          element={<CategoryRoute validCategories={validCategories} />}
+        />
         <Route path="/article/:title" element={<ArticleDetail />} />
-        <Route path="/search/:keyword" element={<Search />} />
+        <Route path="/search" element={<Search />} />
+        {/* 未定義路由，導向首頁 */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );
-  <Route></Route>;
+
+  // 檢查新聞類別
+  function CategoryRoute({ validCategories }) {
+    const { category } = useParams();
+
+    CategoryRoute.propTypes = {
+      validCategories: PropTypes.arrayOf(PropTypes.string).isRequired,
+    };
+
+    // 檢查類別是否在有效列表中
+    if (!validCategories.includes(category)) {
+      return <Navigate to="/" replace />;
+    }
+    return <NewsCategory />;
+  }
   return;
 }
 

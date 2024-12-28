@@ -27,8 +27,7 @@ export const getTopHeadlines = async () => {
 };
 
 // 取得各國新聞
-// countryName => keyword
-// getCountryNews =>  searchNews
+
 export const searchNews = async (keyword) => {
   try {
     const response = await newsApi.get(`/everything`, {
