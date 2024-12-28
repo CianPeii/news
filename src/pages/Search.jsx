@@ -1,9 +1,11 @@
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { searchNews } from "../services/newsApi";
 
 function Search() {
-  let { keyword } = useParams();
+  const location = useLocation();
+  const keyword = location.state?.keyword || "";
 
   return (
     <>

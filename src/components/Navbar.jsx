@@ -18,7 +18,6 @@ function Navbar() {
 
   const handleInputChange = (e) => {
     const newValue = e.target.value;
-    // const sanitizedValue = newValue.replace(/<[^>]*>/g, "");
     setInputValue(newValue);
   };
 
@@ -26,7 +25,12 @@ function Navbar() {
     if (inputValue.trim() === "") {
       return;
     }
-    navigate(`/search/${inputValue}}`);
+
+    navigate("/search", {
+      state: {
+        keyword: inputValue,
+      },
+    });
     setInputValue("");
   };
   return (
@@ -37,7 +41,7 @@ function Navbar() {
           {categories.map((category) => (
             <NavLink
               key={category}
-              to={`/${category}`}
+              to={`/category/${category}`}
               className={({ isActive }) => `
         px-4 py-2 text-white rounded-md transition-all duration-200 
         whitespace-nowrap font-medium text-base 
