@@ -21,6 +21,7 @@ function Navbar() {
     setInputValue(newValue);
   };
 
+  // 搜尋事件
   const handleSearch = () => {
     if (inputValue.trim() === "") {
       return;
@@ -33,6 +34,13 @@ function Navbar() {
     });
     setInputValue("");
   };
+
+  const handleSearchInputKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <>
       <nav className="flex justify-between items-center px-6 py-3 bg-blue-400 shadow-sm rounded-lg mx-4 my-2">
@@ -62,6 +70,7 @@ function Navbar() {
             placeholder="Search"
             value={inputValue}
             onChange={handleInputChange}
+            onKeyDown={handleSearchInputKeyPress}
           />
           <button
             onClick={handleSearch}
