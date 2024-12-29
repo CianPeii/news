@@ -2,6 +2,7 @@ import { useLocation, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import formatDate from "../utils/helpers";
+import { Clock2, UserPen } from "lucide-react";
 
 function ArticleDetail() {
   const { state } = useLocation();
@@ -16,6 +17,7 @@ function ArticleDetail() {
     <>
       <Header />
       <Navbar />
+
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* 文章圖片 */}
         <div className="aspect-video mb-8">
@@ -29,14 +31,17 @@ function ArticleDetail() {
         {/* 文章內容 */}
         <div className="space-y-6">
           <h1 className="text-4xl font-bold text-gray-900">{title}</h1>
+          <div className="flex   flex-col space-y-3 text-gray-600">
+            <div className="flex space-x-1 items-center">
+              <Clock2 />
+              <time>{formatDate(article.publishedAt)}</time>
+            </div>
 
-          <div className="flex items-center text-gray-600">
-            <time>{formatDate(article.publishedAt)}</time>
             {article.author && (
-              <>
-                <span className="mx-2">•</span>
+              <div className="flex space-x-1 items-center text-gray-600">
+                <UserPen />
                 <span>{article.author}</span>
-              </>
+              </div>
             )}
           </div>
 
@@ -52,7 +57,8 @@ function ArticleDetail() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 mt-8 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg group"
           >
-            <span>Read full article</span>
+            <span>Read full article on </span>
+            <span className="font-bold">{article.source.name}</span>
             <svg
               className="w-5 h-5 transition-transform group-hover:translate-x-1"
               xmlns="http://www.w3.org/2000/svg"

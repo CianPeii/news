@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getTopHeadlines, searchNews } from "../services/newsApi";
 import Loading from "../components/Loading";
 import NewsCard from "../components/NewsCard";
+import { useNavigate } from "react-router-dom";
 
 // 導入國家圖標
 import us from "../assets/images/nation/us.png";
@@ -58,6 +59,15 @@ function Home() {
 
     fetchTopHeadlines();
   }, []);
+
+  // 點擊頭條新聞 進入單一新聞頁面
+  const navigate = useNavigate();
+  const handleCardClick = () => {
+    const { articles } = newsData;
+    navigate(`/article/${encodeURIComponent(articles[0].title)}`, {
+      state: { article: articles[0] },
+    });
+  };
 
   // 取得各國新聞
   useEffect(() => {
@@ -153,6 +163,7 @@ function Home() {
             className="relative w-3/5 h-[700px] overflow-hidden"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={handleCardClick}
           >
             <img
               src={newsData.articles[0].urlToImage}
