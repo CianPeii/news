@@ -1,13 +1,12 @@
 import logo from "../assets/images/logo.png";
-import { Menu } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Globe, Bookmark, X, Moon, Sun, Palette } from "lucide-react";
+import { Globe, Bookmark, X, Moon, Sun, Palette, Menu } from "lucide-react";
 
 function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isEnabled, setIsEnabled] = useState(false);
-
+  const navigate = useNavigate();
   return (
     <>
       <header className="flex relative justify-between items-center px-6 py-4  shadow-md rounded-lg m-3">
@@ -78,11 +77,13 @@ function Header() {
                     Language
                   </span>
                 </button>
-
                 {/* 儲存新聞 */}
                 <button
                   className="flex items-center space-x-3 px-6 py-4 hover:bg-sky-50 
                            transition-colors duration-200 border-b border-gray-100 group"
+                  onClick={() => {
+                    navigate("/bookmarks");
+                  }}
                 >
                   <Bookmark
                     className="w-5 h-5 text-gray-500 group-hover:text-sky-500
@@ -95,7 +96,6 @@ function Header() {
                     Saved News
                   </span>
                 </button>
-
                 {/* 視覺偏好設置 */}
                 <div
                   className="flex items-center space-x-3 px-6 py-4 border-b border-gray-100

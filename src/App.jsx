@@ -2,6 +2,7 @@ import Home from "./pages/Home";
 import Category from "./pages/Category";
 import ArticleDetail from "./pages/ArticleDetail";
 import Search from "./pages/Search";
+import Bookmarks from "./pages/Bookmarks";
 import {} from "react-router";
 import ReactDOM from "react-dom/client";
 import {
@@ -35,6 +36,7 @@ function App() {
         />
         <Route path="/article/:title" element={<ArticleDetail />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/bookmarks" element={<Bookmarks />} />
         {/* 未定義路由，導向首頁 */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
