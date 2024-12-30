@@ -99,16 +99,16 @@ function Category() {
         <div className=" py-6 px-8">
           {/* 新聞卡片 */}
           <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-4 px-6">
-            {newsData.articles.map((article) => {
-              return (
+            {newsData.articles.map((article) =>
+              article.author !== null ? (
                 <NewsItems
                   key={article.url}
                   article={article}
                   isBookmarked={checkedItems[article.url]}
                   onBookmarkToggle={() => toggleBookmark(article.url)}
                 />
-              );
-            })}
+              ) : null
+            )}
           </div>
         </div>
       </div>

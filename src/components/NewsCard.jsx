@@ -32,14 +32,16 @@ function NewsCard({
       {/* 新聞網格 */}
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-4 px-6">
         {hasNews ? (
-          articles.map((article) => (
-            <NewsItems
-              key={article.url}
-              article={article}
-              isBookmarked={checkedItems[article.url]}
-              onBookmarkToggle={onBookmarkToggle}
-            />
-          ))
+          articles.map((article) =>
+            article.author !== null ? (
+              <NewsItems
+                key={article.url}
+                article={article}
+                isBookmarked={checkedItems[article.url]}
+                onBookmarkToggle={onBookmarkToggle}
+              />
+            ) : null
+          )
         ) : (
           <p className="text-gray-500">No news available for {nation}</p>
         )}
