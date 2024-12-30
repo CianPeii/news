@@ -158,9 +158,9 @@ function Home() {
         </div>
 
         {/* 頭條新聞展示 */}
-        <div className="flex justify-center">
+        <div className="flex justify-center ">
           <div
-            className="relative w-3/5 h-[700px] overflow-hidden"
+            className="relative w-3/5 h-[700px] overflow-hidden cursor-pointer"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             onClick={handleCardClick}

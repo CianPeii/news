@@ -13,7 +13,7 @@ function NewsItems({ article, isBookmarked, onBookmarkToggle }) {
   };
 
   return (
-    <div className="relative bg-gray-100">
+    <div className="relative bg-gray-100 cursor-pointer">
       {/* 書籤和分享按鈕 */}
       <div className="absolute top-0 right-0 flex justify-end space-x-3 px-3 py-2 ">
         <button
