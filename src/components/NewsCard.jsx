@@ -37,8 +37,8 @@ function NewsCard({
               <NewsItems
                 key={article.url}
                 article={article}
-                isBookmarked={checkedItems[article.url]}
-                onBookmarkToggle={onBookmarkToggle}
+                isBookmarked={!!checkedItems[article.url]?.isBookmarked}
+                onBookmarkToggle={() => onBookmarkToggle(article.url, article)}
               />
             ) : null
           )
@@ -52,13 +52,8 @@ function NewsCard({
 
 // 定義 PropTypes
 NewsCard.propTypes = {
-  // 國家名稱
   nation: PropTypes.string.isRequired,
-
-  // 國旗圖片的 URL
   flagUrl: PropTypes.string.isRequired,
-
-  // 新聞文章陣列
   articles: PropTypes.arrayOf(
     PropTypes.shape({
       url: PropTypes.string.isRequired,
@@ -67,16 +62,12 @@ NewsCard.propTypes = {
       publishedAt: PropTypes.string.isRequired,
     })
   ),
-
-  // 已加入書籤的項目物件
-  checkedItems: PropTypes.objectOf(PropTypes.bool).isRequired,
-
-  // 切換書籤的回調函數
+  checkedItems: PropTypes.object.isRequired,
   onBookmarkToggle: PropTypes.func.isRequired,
 };
 
-// 設定預設值
 NewsCard.defaultProps = {
-  articles: [], // 如果沒有傳入文章，預設為空陣列
+  articles: [],
 };
+
 export default NewsCard;

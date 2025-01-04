@@ -4,27 +4,10 @@ import { useLocation } from "react-router-dom";
 import { searchNews } from "../services/newsApi";
 import { useEffect, useState } from "react";
 import NewsItems from "../components/NewsItems";
+import { useBookmarks } from "../hooks/useBookmarks";
 
 function Search() {
-  // 需要狀態管理的部分
-  // 書籤管理
-  const [checkedItems, setCheckedItems] = useState(() => {
-    const saved = localStorage.getItem("bookmarks");
-    return saved ? JSON.parse(saved) : {};
-  });
-
-  // 書籤切換函數
-  const toggleBookmark = (articleId) => {
-    setCheckedItems((prev) => {
-      const newState = {
-        ...prev,
-        [articleId]: !prev[articleId],
-      };
-      localStorage.setItem("bookmarks", JSON.stringify(newState));
-      return newState;
-    });
-  };
-  // ----
+  const { checkedItems, toggleBookmark } = useBookmarks();
 
   const location = useLocation();
   const keyword = location.state?.keyword || "";
@@ -68,7 +51,7 @@ function Search() {
             <span className="text-gray-500 text-base">
               {newsData.articles.length === 0
                 ? "No matching"
-                : `${newsData.articles.length} matching`}{" "}
+                : `${newsData.articles.length} matching`}
               entries
             </span>
           </div>
@@ -81,8 +64,8 @@ function Search() {
             <NewsItems
               key={article.url}
               article={article}
-              isBookmarked={checkedItems[article.url]}
-              onBookmarkToggle={() => toggleBookmark(article.url)}
+              isBookmarked={checkedItems[article.url]?.isBookmarked}
+              onBookmarkToggle={() => toggleBookmark(article.url, article)}
             />
           );
         })}

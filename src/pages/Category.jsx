@@ -1,6 +1,12 @@
-import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
+import NewsItems from "../components/NewsItems";
+import { getCategoryNews } from "../services/newsApi";
+import { useBookmarks } from "../hooks/useBookmarks";
+
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 import {
   Globe,
   Briefcase,
@@ -10,31 +16,10 @@ import {
   Microscope,
   Heart,
 } from "lucide-react";
-import NewsItems from "../components/NewsItems";
-import { getCategoryNews } from "../services/newsApi";
-import { useEffect, useState } from "react";
 
 function Category() {
-  // 需要狀態管理的部分
-  // 書籤管理
-  const [checkedItems, setCheckedItems] = useState(() => {
-    const saved = localStorage.getItem("bookmarks");
-    return saved ? JSON.parse(saved) : {};
-  });
-
-  // 書籤切換函數
-  const toggleBookmark = (articleId) => {
-    setCheckedItems((prev) => {
-      const newState = {
-        ...prev,
-        [articleId]: !prev[articleId],
-      };
-      localStorage.setItem("bookmarks", JSON.stringify(newState));
-      return newState;
-    });
-  };
-  // ----
   let { category } = useParams();
+  const { checkedItems, toggleBookmark } = useBookmarks();
 
   const categories = [
     { name: "general", Icon: Globe },
@@ -104,8 +89,8 @@ function Category() {
                 <NewsItems
                   key={article.url}
                   article={article}
-                  isBookmarked={checkedItems[article.url]}
-                  onBookmarkToggle={() => toggleBookmark(article.url)}
+                  isBookmarked={checkedItems[article.url]?.isBookmarked}
+                  onBookmarkToggle={() => toggleBookmark(article.url, article)}
                 />
               ) : null
             )}

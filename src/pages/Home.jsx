@@ -5,6 +5,7 @@ import { getTopHeadlines, searchNews } from "../services/newsApi";
 import Loading from "../components/Loading";
 import NewsCard from "../components/NewsCard";
 import { useNavigate } from "react-router-dom";
+import { useBookmarks } from "../hooks/useBookmarks";
 
 // 導入國家圖標
 import us from "../assets/images/nation/us.png";
@@ -26,17 +27,12 @@ function Home() {
   const [isHovered, setIsHovered] = useState(false);
   const [countryLoading, setCountryLoading] = useState(true);
 
-  // 狀態管理
   const [newsData, setNewsData] = useState({
     loading: true,
     error: null,
     articles: [],
   });
   const [countryNewsData, setCountryNewsData] = useState({});
-  const [checkedItems, setCheckedItems] = useState(() => {
-    const saved = localStorage.getItem("bookmarks");
-    return saved ? JSON.parse(saved) : {};
-  });
 
   // 取得頭條新聞
   useEffect(() => {
@@ -96,16 +92,7 @@ function Home() {
   }, []);
 
   // 處理書籤功能
-  const toggleBookmark = (articleId) => {
-    setCheckedItems((prev) => {
-      const newState = {
-        ...prev,
-        [articleId]: !prev[articleId],
-      };
-      localStorage.setItem("bookmarks", JSON.stringify(newState));
-      return newState;
-    });
-  };
+  const { checkedItems, toggleBookmark } = useBookmarks();
 
   // 載入中狀態處理
   if (newsData.loading || countryLoading) {
