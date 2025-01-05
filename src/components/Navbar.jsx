@@ -43,9 +43,9 @@ function Navbar() {
 
   return (
     <>
-      <nav className="flex justify-between items-center px-6 py-3 bg-blue-400 shadow-sm rounded-lg mx-4 my-2">
+      <nav className="flex flex-col sm:flex-row justify-between items-center px-6 py-3 bg-blue-400 shadow-sm rounded-lg mx-4 my-2 ">
         {/* 類別選單區域 */}
-        <div className="flex space-x-6 overflow-x-auto">
+        <div className="xl:flex grid-cols-1 grid gap-3  lg:grid-cols-3 sm:grid-cols-2  ">
           {categories.map((category) => (
             <NavLink
               key={category}
