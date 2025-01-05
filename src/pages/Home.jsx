@@ -91,7 +91,7 @@ function Home() {
     fetchAllCountryNews();
   }, []);
 
-  // 處理書籤功能
+  // 書籤功能
   const { checkedItems, toggleBookmark } = useBookmarks();
 
   // 載入中狀態處理

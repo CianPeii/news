@@ -41,6 +41,5 @@ export function useBookmarks() {
   // 判斷是否有書籤
   const hasBookmarks = Object.keys(checkedItems).length > 0;
 
-  // 返回狀態和方法
   return { checkedItems, toggleBookmark, hasBookmarks };
 }
