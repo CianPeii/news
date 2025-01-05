@@ -35,7 +35,7 @@ function Navbar() {
     setInputValue("");
   };
 
-  const handleSearchInputKeyPress = (e) => {
+  const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSearch();
     }
@@ -70,7 +70,7 @@ function Navbar() {
             placeholder="Search"
             value={inputValue}
             onChange={handleInputChange}
-            onKeyDown={handleSearchInputKeyPress}
+            onKeyDown={handleKeyDown}
           />
           <button
             onClick={handleSearch}
