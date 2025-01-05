@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import NewsItems from "../components/NewsItems";
+import Loading from "../components/Loading";
 import { getCategoryNews } from "../services/newsApi";
 import { useBookmarks } from "../hooks/useBookmarks";
 
@@ -59,6 +60,11 @@ function Category() {
 
     fetchCategoryNews();
   }, [category]);
+
+  // 載入中狀態處理
+  if (newsData.loading) {
+    return <Loading />;
+  }
 
   return (
     <>

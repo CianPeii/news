@@ -5,6 +5,7 @@ import { searchNews } from "../services/newsApi";
 import { useEffect, useState } from "react";
 import NewsItems from "../components/NewsItems";
 import { useBookmarks } from "../hooks/useBookmarks";
+import Loading from "../components/Loading";
 
 function Search() {
   const { checkedItems, toggleBookmark } = useBookmarks();
@@ -37,6 +38,10 @@ function Search() {
     fetchSearchNews();
   }, [keyword]);
 
+  // 載入中狀態處理
+  if (newsData.loading) {
+    return <Loading />;
+  }
   return (
     <>
       <Header />
