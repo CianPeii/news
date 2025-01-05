@@ -1,4 +1,4 @@
-import formatDate from "../utils/helpers";
+import formatDate from "../utils/formatDate";
 import PropTypes from "prop-types";
 import placeholderImg from "../assets/images/placeholder.jpg";
 import { useNavigate } from "react-router-dom";

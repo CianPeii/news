@@ -1,7 +1,7 @@
 import { useLocation, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
-import formatDate from "../utils/helpers";
+import formatDate from "../utils/formatDate";
 import { Clock2, UserPen } from "lucide-react";
 
 function ArticleDetail() {
