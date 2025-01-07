@@ -2,12 +2,15 @@ import logo from "../assets/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Globe, Bookmark, X, Moon, Sun, Palette, Menu } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 function Header() {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   // TODO:改名=>isDark
   const [isEnabled, setIsEnabled] = useState(false);
-  const navigate = useNavigate();
 
   // 切換深色模式
   const handleThemeToggle = () => {
@@ -59,7 +62,7 @@ function Header() {
               {/*Menu */}
               <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
                 <h1 className="text-2xl font-semibold text-slate-900 dark:text-white">
-                  Menu
+                  {t("menu")}
                 </h1>
                 <button
                   className="p-2 rounded-full 
