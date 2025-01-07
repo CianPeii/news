@@ -5,11 +5,27 @@ import { Globe, Bookmark, X, Moon, Sun, Palette, Menu } from "lucide-react";
 
 function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  // TODO:改名=>isDark
   const [isEnabled, setIsEnabled] = useState(false);
   const navigate = useNavigate();
+
+  // 切換深色模式
+  const handleThemeToggle = () => {
+    setIsEnabled(!isEnabled);
+    if (!isEnabled) {
+      // 切換到深色模式
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      // 切換到淺色模式
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  };
+
   return (
     <>
-      <header className="flex relative justify-between items-center px-6 py-4  shadow-md rounded-lg m-3">
+      <header className="bg-white dark:bg-slate-900 flex relative justify-between items-center px-6 py-4  shadow-md rounded-lg m-3 ">
         <Link to="/">
           <div className="flex items-center space-x-2">
             <img
@@ -39,13 +55,15 @@ function Header() {
         >
           <div className="absolute inset-y-0 right-0 w-80 flex">
             {/* 側邊欄主體 */}
-            <div className="w-full bg-white shadow-2xl">
+            <div className="w-full bg-white dark:bg-slate-800 shadow-2xl">
               {/*Menu */}
               <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
-                <h1 className="text-2xl font-semibold text-gray-800">Menu</h1>
+                <h1 className="text-2xl font-semibold text-slate-900 dark:text-white">
+                  Menu
+                </h1>
                 <button
                   className="p-2 rounded-full 
-                     bg-gray-50 hover:bg-sky-500 group
+                     bg-gray-50   dark:bg-slate-900  hover:bg-sky-500 group
                      transform transition-all duration-300 ease-in-out
                      hover:rotate-90 hover:scale-110
                      active:scale-95
@@ -71,7 +89,7 @@ function Header() {
                           transition-colors duration-200"
                   />
                   <span
-                    className="text-lg text-gray-700 group-hover:text-gray-900
+                    className="text-lg text-gray-700 dark:text-white group-hover:text-gray-900
                           transition-colors duration-200"
                   >
                     Language
@@ -90,7 +108,7 @@ function Header() {
                              transition-colors duration-200"
                   />
                   <span
-                    className="text-lg text-gray-700 group-hover:text-gray-900
+                    className="text-lg text-gray-700 dark:text-white group-hover:text-gray-900
                           transition-colors duration-200"
                   >
                     Saved News
@@ -105,15 +123,15 @@ function Header() {
                     className="w-5 h-5 text-gray-500 group-hover:text-sky-500 
                           transition-colors duration-200"
                   />
-                  <span className="text-lg text-gray-700">
-                    Visual Preferences
+                  <span className="text-lg text-gray-700 dark:text-white  group-hover:text-gray-900">
+                    Dark Mode
                   </span>
                   <button
-                    onClick={() => setIsEnabled(!isEnabled)}
+                    onClick={handleThemeToggle}
                     className={`relative inline-flex h-7 w-12 items-center rounded-full 
                        transition-colors duration-300 ease-in-out
                        focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2
-                       ${isEnabled ? "bg-gray-700" : "bg-gray-200"}`}
+                       ${isEnabled ? "bg-gray-700 " : "bg-gray-200 "}`}
                   >
                     <span
                       className={`inline-block h-5 w-5 transform rounded-full bg-white 

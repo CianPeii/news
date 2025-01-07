@@ -25,7 +25,9 @@ function NewsCard({
               loading="lazy"
             />
           </div>
-          <h2 className="text-lg font-bold tracking-wide">{nation} News</h2>
+          <h2 className="text-lg font-bold tracking-wide text-slate-900 dark:text-white">
+            {nation} News
+          </h2>
         </div>
       </div>
 

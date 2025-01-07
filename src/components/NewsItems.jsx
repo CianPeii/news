@@ -21,7 +21,7 @@ function NewsItems({ article, isBookmarked, onBookmarkToggle }) {
   };
 
   return (
-    <div className="relative bg-gray-100 cursor-pointer">
+    <div className="relative bg-gray-100 dark:bg-slate-900 cursor-pointer">
       {/* 書籤按鈕 */}
 
       <div className="absolute top-0 right-0 flex justify-end space-x-3 px-3 py-2 ">
@@ -88,8 +88,10 @@ function NewsItems({ article, isBookmarked, onBookmarkToggle }) {
 
         {/* 新聞標題和日期 */}
         <div className="px-4 space-y-2 py-3">
-          <h3 className="text-xl font-semibold truncate">{article.title}</h3>
-          <p className="text-base text-gray-500">
+          <h3 className="text-xl font-semibold truncate text-slate-900 dark:text-white">
+            {article.title}
+          </h3>
+          <p className="text-base text-slate-500 dark:text-slate-400">
             {formatDate(article.publishedAt)}
           </p>
         </div>

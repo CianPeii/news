@@ -1,5 +1,3 @@
-import Navbar from "../components/Navbar";
-import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import { getTopHeadlines, searchNews } from "../services/newsApi";
 import Loading from "../components/Loading";
@@ -115,9 +113,6 @@ function Home() {
 
   return (
     <>
-      <Header />
-      <Navbar />
-
       {/* 主要頭條區 */}
       <div>
         <div className="flex items-center gap-3 py-4 px-6">
@@ -140,14 +135,16 @@ function Home() {
                 fill="red"
               />
             </svg>
-            <h1 className="text-lg font-bold tracking-wide">TOP HEADLINES</h1>
+            <h1 className="text-lg font-bold tracking-wide text-slate-900 dark:text-white">
+              TOP HEADLINES
+            </h1>
           </div>
         </div>
 
         {/* 頭條新聞展示 */}
         <div className="flex justify-center ">
           <div
-            className="relative w-5/6 sm:w-3/5  h-[300px] md:h-[500px] 2xl:h-[700px] overflow-hidden cursor-pointer"
+            className="relative w-5/6 sm:w-3/5  h-[300px] md:h-[450px] 2xl:h-[600px] overflow-hidden cursor-pointer"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             onClick={handleCardClick}

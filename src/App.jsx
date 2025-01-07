@@ -5,6 +5,7 @@ import Search from "./pages/Search";
 import Bookmarks from "./pages/Bookmarks";
 import {} from "react-router";
 import ReactDOM from "react-dom/client";
+import Layout from "./components/Layout";
 import {
   BrowserRouter,
   Routes,
@@ -29,16 +30,18 @@ function App() {
   ReactDOM.createRoot(root).render(
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/category/:category"
-          element={<CategoryRoute validCategories={validCategories} />}
-        />
-        <Route path="/article/:title" element={<ArticleDetail />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/bookmarks" element={<Bookmarks />} />
-        {/* 未定義路由，導向首頁 */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/category/:category"
+            element={<CategoryRoute validCategories={validCategories} />}
+          />
+          <Route path="/article/:title" element={<ArticleDetail />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/bookmarks" element={<Bookmarks />} />
+          {/* 未定義路由，導向首頁 */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

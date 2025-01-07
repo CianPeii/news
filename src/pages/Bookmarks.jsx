@@ -1,5 +1,3 @@
-import Header from "../components/Header";
-import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 import { Bookmark } from "lucide-react";
 import NewsItems from "../components/NewsItems";
@@ -33,10 +31,10 @@ const Bookmarks = () => {
     return (
       <div className="text-center py-12">
         <Bookmark className="w-16 h-16 mx-auto text-gray-300 mb-4" />
-        <h3 className="text-lg font-medium text-gray-900 mb-2">
+        <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">
           No bookmarks yet
         </h3>
-        <p className="text-gray-500 mb-6">
+        <p className="text-slate-500 dark:text-slate-400 mb-6">
           Articles you bookmark will appear here
         </p>
         <Link
@@ -51,13 +49,7 @@ const Bookmarks = () => {
   };
 
   // 3. 主要的渲染結構
-  return (
-    <>
-      <Header />
-      <Navbar />
-      {renderContent()}
-    </>
-  );
+  return <>{renderContent()}</>;
 };
 
 export default Bookmarks;

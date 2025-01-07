@@ -1,5 +1,3 @@
-import Header from "../components/Header";
-import Navbar from "../components/Navbar";
 import { useLocation } from "react-router-dom";
 import { searchNews } from "../services/newsApi";
 import { useEffect, useState } from "react";
@@ -44,12 +42,12 @@ function Search() {
   }
   return (
     <>
-      <Header />
-      <Navbar />
       <div className="py-6 px-8">
         <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-4">
           <div className="flex items-center space-x-1 ">
-            <span>Search Results for</span>
+            <span className="text-slate-900 dark:text-white">
+              Search Results for
+            </span>
             <span className="text-blue-600 italic bg-blue-100 px-2 py-1 rounded-md">
               {`"${keyword} "`}
             </span>

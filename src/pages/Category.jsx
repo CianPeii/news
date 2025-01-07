@@ -1,5 +1,3 @@
-import Navbar from "../components/Navbar";
-import Header from "../components/Header";
 import NewsItems from "../components/NewsItems";
 import Loading from "../components/Loading";
 import { getCategoryNews } from "../services/newsApi";
@@ -68,19 +66,17 @@ function Category() {
 
   return (
     <>
-      <Header />
-      <Navbar />
       <div className="py-6 px-8 ">
         <div className="flex items-center gap-4 border-l-4 border-blue-500 pl-4">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 ">
             {CategoryIcon && (
-              <div className="p-3 bg-blue-50 rounded-lg">
+              <div className="p-3 bg-white dark:bg-slate-900 rounded-lg">
                 <CategoryIcon className="w-6 h-6 text-blue-600" />
               </div>
             )}
 
             <div>
-              <h1 className="text-3xl font-bold text-gray-800">
+              <h1 className="text-3xl font-bold  dark:text-white  text-slate-900 dark:text-white ">
                 {category.charAt(0).toUpperCase() +
                   category.slice(1).toLowerCase()}
               </h1>
