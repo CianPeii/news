@@ -2,8 +2,11 @@ import { Search } from "lucide-react";
 import { NavLink } from "react-router";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function Navbar() {
+  const { t } = useTranslation();
+
   const categories = [
     "general",
     "business",
@@ -57,7 +60,8 @@ function Navbar() {
         ${isActive ? "underline" : ""}
       `}
             >
-              {category.toUpperCase()}
+              {/* {category.toUpperCase()} */}
+              {t(category)}
             </NavLink>
           ))}
         </div>
@@ -67,7 +71,7 @@ function Navbar() {
           <input
             className="bg-transparent outline-none placeholder-gray-400 w-48 text-sm"
             type="text"
-            placeholder="Search"
+            placeholder={t("search")}
             value={inputValue}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}

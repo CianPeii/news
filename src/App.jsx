@@ -3,7 +3,6 @@ import Category from "./pages/Category";
 import ArticleDetail from "./pages/ArticleDetail";
 import Search from "./pages/Search";
 import Bookmarks from "./pages/Bookmarks";
-import {} from "react-router";
 import ReactDOM from "react-dom/client";
 import Layout from "./components/Layout";
 import {
@@ -14,6 +13,7 @@ import {
   Navigate,
 } from "react-router";
 import PropTypes from "prop-types";
+import "./i18n";
 
 const validCategories = [
   "general",

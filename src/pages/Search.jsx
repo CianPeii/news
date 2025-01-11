@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import NewsItems from "../components/NewsItems";
 import { useBookmarks } from "../hooks/useBookmarks";
 import Loading from "../components/Loading";
+import { useTranslation } from "react-i18next";
 
 function Search() {
   const { checkedItems, toggleBookmark } = useBookmarks();
-
+  const { t } = useTranslation();
   const location = useLocation();
   const keyword = location.state?.keyword || "";
   const [newsData, setNewsData] = useState({
@@ -46,16 +47,16 @@ function Search() {
         <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-4">
           <div className="flex items-center space-x-1 ">
             <span className="text-slate-900 dark:text-white">
-              Search Results for
+              {t("searchResults")}
             </span>
             <span className="text-blue-600 italic bg-blue-100 px-2 py-1 rounded-md">
               {`"${keyword} "`}
             </span>
             <span className="text-gray-500 text-base">
               {newsData.articles.length === 0
-                ? "No matching"
-                : `${newsData.articles.length} matching`}
-              entries
+                ? `${t("no")} ${t("matching")}`
+                : `${newsData.articles.length}   ${t("matching")}`}
+              {t("entries")}
             </span>
           </div>
         </h1>

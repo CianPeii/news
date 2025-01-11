@@ -1,0 +1,34 @@
+{
+  "menu": "Menu",
+  "savedNews": "Saved News",
+  "darkMode": "Dark Mode",
+  "search": "Search",
+  "loading": "Loading....",
+  "linkHasBeenCopied!": "Link has been copied!",
+  "language": " Language",
+
+  "noBookmarksYet": "No bookmarks yet",
+  "articlesYouBookmarkWillAppearHere": "Articles you bookmark will appear here",
+  "discoverArticles": "Discover Articles",
+  "news": "News",
+  "topHeadlines": "TOP HEADLINES",
+
+  "USA": "USA",
+  "Switzerland": "Switzerland",
+  "Germany": "Germany",
+  "Taiwan": "Taiwan",
+  "Japan": "Japan",
+
+  "general": "General",
+  "business": "Business",
+  "technology": "Technology",
+  "entertainment": "Entertainment",
+  "sports": "Sports",
+  "science": "Science",
+  "health": "Health",
+
+  "searchResults": "Search Results for",
+  "matching": "matching",
+  "entries": "entries",
+  "no": "No"
+}

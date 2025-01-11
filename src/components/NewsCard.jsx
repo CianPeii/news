@@ -1,5 +1,6 @@
 import NewsItems from "./NewsItems";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 function NewsCard({
   nation,
@@ -10,7 +11,7 @@ function NewsCard({
 }) {
   // 檢查是否有新聞數據
   const hasNews = articles?.length > 0;
-
+  const { t } = useTranslation();
   return (
     <div className="py-4 px-6">
       {/* 國家標題區塊 */}
@@ -26,7 +27,7 @@ function NewsCard({
             />
           </div>
           <h2 className="text-lg font-bold tracking-wide text-slate-900 dark:text-white">
-            {nation} News
+            {t(nation)} {t("news")}
           </h2>
         </div>
       </div>

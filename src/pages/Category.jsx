@@ -5,6 +5,7 @@ import { useBookmarks } from "../hooks/useBookmarks";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import {
   Globe,
@@ -19,6 +20,7 @@ import {
 function Category() {
   let { category } = useParams();
   const { checkedItems, toggleBookmark } = useBookmarks();
+  const { t } = useTranslation();
 
   const categories = [
     { name: "general", Icon: Globe },
@@ -77,8 +79,7 @@ function Category() {
 
             <div>
               <h1 className="text-3xl font-bold  dark:text-white  text-slate-900 dark:text-white ">
-                {category.charAt(0).toUpperCase() +
-                  category.slice(1).toLowerCase()}
+                {t(category)}
               </h1>
             </div>
           </div>

@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import { Bookmark } from "lucide-react";
 import NewsItems from "../components/NewsItems";
 import { useBookmarks } from "../hooks/useBookmarks";
+import { useTranslation } from "react-i18next";
 
 const Bookmarks = () => {
+  const { t } = useTranslation();
+
   const { checkedItems, toggleBookmark, hasBookmarks } = useBookmarks();
 
   const renderContent = () => {
@@ -32,17 +35,17 @@ const Bookmarks = () => {
       <div className="text-center py-12">
         <Bookmark className="w-16 h-16 mx-auto text-gray-300 mb-4" />
         <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">
-          No bookmarks yet
+          {t("noBookmarksYet")}
         </h3>
         <p className="text-slate-500 dark:text-slate-400 mb-6">
-          Articles you bookmark will appear here
+          {t("articlesYouBookmarkWillAppearHere")}
         </p>
         <Link
           to="/"
           className="inline-flex items-center px-4 py-2 bg-sky-500 text-white
                     rounded-full hover:bg-sky-600 transition-colors duration-200"
         >
-          Discover Articles
+          {t("discoverArticles")}
         </Link>
       </div>
     );

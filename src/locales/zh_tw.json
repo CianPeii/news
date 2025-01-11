@@ -1,0 +1,34 @@
+{
+  "menu": "選單",
+  "savedNews": "閱讀清單",
+  "darkMode": "深色模式",
+  "search": "搜尋",
+  "loading": "載入中....",
+  "linkHasBeenCopied!": "連結已複製！",
+  "language": "語言",
+
+  "noBookmarksYet": "尚無閱讀清單",
+  "articlesYouBookmarkWillAppearHere": "您收藏的文章將在此處顯示",
+  "discoverArticles": "發現文章",
+  "news": "新聞",
+  "topHeadlines": "頭條新聞",
+
+  "USA": "美國",
+  "Switzerland": "瑞士",
+  "Germany": "德國",
+  "Taiwan": "台灣",
+  "Japan": "日本",
+
+  "general": "一般",
+  "business": "商業",
+  "technology": "科技",
+  "entertainment": "娛樂",
+  "sports": "體育",
+  "science": "科學",
+  "health": "健康",
+
+  "searchResults": "搜尋結果",
+  "matching": "個符合",
+  "entries": "項目",
+  "no": "0"
+}

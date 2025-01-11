@@ -4,6 +4,7 @@ import Loading from "../components/Loading";
 import NewsCard from "../components/NewsCard";
 import { useNavigate } from "react-router-dom";
 import { useBookmarks } from "../hooks/useBookmarks";
+import { useTranslation } from "react-i18next";
 
 // 導入國家圖標
 import us from "../assets/images/nation/us.png";
@@ -22,6 +23,8 @@ const nations = [
 ];
 
 function Home() {
+  const { t } = useTranslation();
+
   const [isHovered, setIsHovered] = useState(false);
   const [countryLoading, setCountryLoading] = useState(true);
 
@@ -136,7 +139,7 @@ function Home() {
               />
             </svg>
             <h1 className="text-lg font-bold tracking-wide text-slate-900 dark:text-white">
-              TOP HEADLINES
+              {t("topHeadlines")}
             </h1>
           </div>
         </div>

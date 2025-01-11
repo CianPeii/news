@@ -4,9 +4,11 @@ import placeholderImg from "../assets/images/placeholder.jpg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { useTranslation } from "react-i18next";
 
 function NewsItems({ article, isBookmarked, onBookmarkToggle }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleCardClick = () => {
     navigate(`/article/${encodeURIComponent(article.title)}`, {
@@ -101,7 +103,7 @@ function NewsItems({ article, isBookmarked, onBookmarkToggle }) {
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
      bg-black/60 text-white px-3 py-1 rounded text-sm"
         >
-          Link has been copied!
+          {t("linkHasBeenCopied!")}
         </p>
       )}
     </div>
