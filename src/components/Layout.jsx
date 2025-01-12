@@ -16,9 +16,7 @@ function Layout() {
     <div>
       <Header />
       <Navbar />
-      <main>
-        <Outlet />
-      </main>
+      <Outlet />
       <ToTop />
     </div>
   );
