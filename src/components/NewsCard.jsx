@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 function NewsCard({
   nation,
   flagUrl,
-  articles,
+  articles = [],
   checkedItems,
   onBookmarkToggle,
 }) {
@@ -67,10 +67,6 @@ NewsCard.propTypes = {
   ),
   checkedItems: PropTypes.object.isRequired,
   onBookmarkToggle: PropTypes.func.isRequired,
-};
-
-NewsCard.defaultProps = {
-  articles: [],
 };
 
 export default NewsCard;
