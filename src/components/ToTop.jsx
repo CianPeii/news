@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 function ToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
-  // 監聽滾動事件來控制按鈕顯示
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.scrollY > 300) {
@@ -15,10 +14,6 @@ function ToTop() {
     };
 
     window.addEventListener("scroll", toggleVisibility);
-
-    return () => {
-      window.removeEventListener("scroll", toggleVisibility);
-    };
   }, []);
 
   // 平滑滾動到頂部
