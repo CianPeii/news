@@ -54,11 +54,10 @@ function App() {
       validCategories: PropTypes.arrayOf(PropTypes.string).isRequired,
     };
 
-    // 檢查類別是否在有效列表中
+    // 檢查新聞類別是否在有效列表中
     if (!validCategories.includes(category)) {
       return <Navigate to="/" replace />;
     }
-
     return <Category />;
   }
   return;
