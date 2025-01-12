@@ -28,13 +28,13 @@ function Header() {
   const toggleLanguageMenu = () => {
     setIsLanguageMenuOpen(!isLanguageMenuOpen);
   };
-  // TODO:改名=>isDark
-  const [isEnabled, setIsEnabled] = useState(false);
+  //TODO:怎用
+  const [isDark, setIsDark] = useState(false);
 
   // 切換深色模式
   const handleThemeToggle = () => {
-    setIsEnabled(!isEnabled);
-    if (!isEnabled) {
+    setIsDark(!isDark);
+    if (!isDark) {
       // 切換到深色模式
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
@@ -197,15 +197,15 @@ function Header() {
                     className={`relative inline-flex h-7 w-12 items-center rounded-full 
                        transition-colors duration-300 ease-in-out
                        focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2
-                       ${isEnabled ? "bg-gray-700 " : "bg-gray-200 "}`}
+                       ${isDark ? "bg-gray-700 " : "bg-gray-200 "}`}
                   >
                     <span
                       className={`inline-block h-5 w-5 transform rounded-full bg-white 
                          shadow-md transition-transform duration-300 ease-in-out
-                         ${isEnabled ? "translate-x-6" : "translate-x-1"}`}
+                         ${isDark ? "translate-x-6" : "translate-x-1"}`}
                     >
                       <span className="flex h-full w-full items-center justify-center">
-                        {isEnabled ? (
+                        {isDark ? (
                           <Moon className="h-3 w-3 text-gray-600" />
                         ) : (
                           <Sun className="h-3 w-3 text-gray-600" />
