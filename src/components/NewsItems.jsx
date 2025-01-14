@@ -118,7 +118,7 @@ NewsItems.propTypes = {
     publishedAt: PropTypes.string.isRequired,
   }).isRequired,
 
-  isBookmarked: PropTypes.bool.isRequired,
+  isBookmarked: PropTypes.bool,
 
   onBookmarkToggle: PropTypes.func.isRequired,
 };
