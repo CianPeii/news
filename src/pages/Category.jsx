@@ -1,42 +1,27 @@
 import NewsItems from "../components/NewsItems";
 import Loading from "../components/Loading";
+import ErrorMessage from "../components/ErrorMessage";
 import { getCategoryNews } from "../services/newsApi";
 import { useBookmarks } from "../hooks/useBookmarks";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
-import {
-  Globe,
-  Briefcase,
-  CircuitBoard,
-  Film,
-  Trophy,
-  Microscope,
-  Heart,
-} from "lucide-react";
+import { useCategory } from "../hooks/useCategory";
 
 function Category() {
   let { category } = useParams();
   const { checkedItems, toggleBookmark } = useBookmarks();
   const { t } = useTranslation();
+  const { categories } = useCategory();
 
-  const categories = [
-    { name: "general", Icon: Globe },
-    { name: "business", Icon: Briefcase },
-    { name: "technology", Icon: CircuitBoard },
-    { name: "entertainment", Icon: Film },
-    { name: "sports", Icon: Trophy },
-    { name: "science", Icon: Microscope },
-    { name: "health", Icon: Heart },
-  ];
-  const CategoryIcon = categories.find((item) => item.name === category)?.Icon;
   const [newsData, setNewsData] = useState({
     articles: [],
   });
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+
+  const CategoryIcon = categories.find((item) => item.name === category)?.Icon;
 
   useEffect(() => {
     const fetchCategoryNews = async () => {
@@ -58,17 +43,12 @@ function Category() {
     fetchCategoryNews();
   }, [category]);
 
-  // 載入中狀態處理
   if (isLoading) {
     return <Loading />;
   }
-  // 錯誤狀態處理
+
   if (errorMessage) {
-    return (
-      <div className="flex justify-center items-center h-screen text-red-600">
-        Error: {errorMessage}
-      </div>
-    );
+    return <ErrorMessage message={errorMessage} />;
   }
 
   return (

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getTopHeadlines, searchNews } from "../services/newsApi";
 import Loading from "../components/Loading";
+import ErrorMessage from "../components/ErrorMessage";
 import NewsCard from "../components/NewsCard";
 import { useNavigate } from "react-router-dom";
 import { useBookmarks } from "../hooks/useBookmarks";
@@ -95,18 +96,12 @@ function Home() {
   // 書籤功能
   const { checkedItems, toggleBookmark } = useBookmarks();
 
-  // 載入中狀態處理
   if (isLoading) {
     return <Loading />;
   }
 
-  // 錯誤狀態處理
   if (errorMessage) {
-    return (
-      <div className="flex justify-center items-center h-screen text-red-600">
-        Error: {errorMessage}
-      </div>
-    );
+    return <ErrorMessage message={errorMessage} />;
   }
 
   // 確保有資料才渲染

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import NewsItems from "../components/NewsItems";
 import { useBookmarks } from "../hooks/useBookmarks";
 import Loading from "../components/Loading";
+import ErrorMessage from "../components/ErrorMessage";
 import { useTranslation } from "react-i18next";
 
 function Search() {
@@ -38,18 +39,14 @@ function Search() {
     fetchSearchNews();
   }, [keyword]);
 
-  // 錯誤狀態處理
-  if (errorMessage) {
-    return (
-      <div className="flex justify-center items-center h-screen text-red-600">
-        Error: {errorMessage}
-      </div>
-    );
-  }
-  // 載入中狀態處理
   if (isLoading) {
     return <Loading />;
   }
+
+  if (errorMessage) {
+    return <ErrorMessage message={errorMessage} />;
+  }
+
   return (
     <>
       <div className="py-6 px-8">
