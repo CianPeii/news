@@ -11,34 +11,44 @@ function Search() {
   const { t } = useTranslation();
   const location = useLocation();
   const keyword = location.state?.keyword || "";
+
   const [newsData, setNewsData] = useState({
-    loading: true,
-    error: null,
     articles: [],
   });
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     const fetchSearchNews = async () => {
       try {
         const response = await searchNews(keyword);
         setNewsData({
-          loading: false,
-          error: null,
           articles: response,
         });
+        setIsLoading(false);
+        setErrorMessage(null);
       } catch (error) {
         setNewsData({
-          loading: false,
-          error: error.message,
           articles: [],
         });
+        setIsLoading(false);
+        setErrorMessage(error.message);
       }
     };
     fetchSearchNews();
   }, [keyword]);
 
+  // 錯誤狀態處理
+  if (errorMessage) {
+    return (
+      <div className="flex justify-center items-center h-screen text-red-600">
+        Error: {errorMessage}
+      </div>
+    );
+  }
   // 載入中狀態處理
-  if (newsData.loading) {
+  if (isLoading) {
     return <Loading />;
   }
   return (
