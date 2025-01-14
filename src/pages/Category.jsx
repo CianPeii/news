@@ -32,29 +32,27 @@ function Category() {
     { name: "health", Icon: Heart },
   ];
   const CategoryIcon = categories.find((item) => item.name === category)?.Icon;
-
   const [newsData, setNewsData] = useState({
-    loading: true,
-    error: null,
     articles: [],
   });
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     const fetchCategoryNews = async () => {
       try {
         const response = await getCategoryNews(category);
-
         setNewsData({
-          loading: false,
-          error: null,
           articles: response,
         });
+        setIsLoading(false);
+        setErrorMessage(null);
       } catch (error) {
         setNewsData({
-          loading: false,
-          error: error.message,
           articles: [],
         });
+        setIsLoading(false);
+        setErrorMessage(error.message);
       }
     };
 
@@ -62,8 +60,16 @@ function Category() {
   }, [category]);
 
   // 載入中狀態處理
-  if (newsData.loading) {
+  if (isLoading) {
     return <Loading />;
+  }
+  // 錯誤狀態處理
+  if (errorMessage) {
+    return (
+      <div className="flex justify-center items-center h-screen text-red-600">
+        Error: {errorMessage}
+      </div>
+    );
   }
 
   return (

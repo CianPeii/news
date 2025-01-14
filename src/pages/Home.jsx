@@ -26,13 +26,12 @@ function Home() {
   const { t } = useTranslation();
 
   const [isHovered, setIsHovered] = useState(false);
-  const [countryLoading, setCountryLoading] = useState(true);
 
-  const [newsData, setNewsData] = useState({
-    loading: true,
-    error: null,
+  const [topHeadlinesData, setTopHeadlinesData] = useState({
     articles: [],
   });
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [countryNewsData, setCountryNewsData] = useState({});
 
   // 取得頭條新聞
@@ -40,17 +39,17 @@ function Home() {
     const fetchTopHeadlines = async () => {
       try {
         const response = await getTopHeadlines();
-        setNewsData({
-          loading: false,
-          error: null,
+        setTopHeadlinesData({
           articles: response.articles,
         });
+        setIsLoading(false);
+        setErrorMessage(null);
       } catch (error) {
-        setNewsData({
-          loading: false,
-          error: error.message,
+        setTopHeadlinesData({
           articles: [],
         });
+        setIsLoading(false);
+        setErrorMessage(error.message);
       }
     };
 
@@ -60,7 +59,7 @@ function Home() {
   // 點擊頭條新聞 進入單一新聞頁面
   const navigate = useNavigate();
   const handleCardClick = () => {
-    const { articles } = newsData;
+    const { articles } = topHeadlinesData;
     navigate(`/article/${encodeURIComponent(articles[0].title)}`, {
       state: { article: articles[0] },
     });
@@ -69,7 +68,7 @@ function Home() {
   // 取得各國新聞
   useEffect(() => {
     const fetchAllCountryNews = async () => {
-      setCountryLoading(true);
+      setIsLoading(true);
       try {
         const newsPromises = nations.map(async ({ nation }) => {
           const articles = await searchNews(nation);
@@ -77,15 +76,19 @@ function Home() {
         });
 
         const results = await Promise.all(newsPromises);
-        const newsObject = results.reduce((acc, { nation, articles }) => {
-          acc[nation] = articles;
-          return acc;
-        }, {});
-        setCountryNewsData(newsObject);
+        const countryNewsObject = results.reduce(
+          (acc, { nation, articles }) => {
+            acc[nation] = articles;
+            return acc;
+          },
+          {}
+        );
+
+        setCountryNewsData(countryNewsObject);
       } catch (error) {
         console.error("取得各國新聞時發生錯誤:", error);
       } finally {
-        setCountryLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -96,21 +99,21 @@ function Home() {
   const { checkedItems, toggleBookmark } = useBookmarks();
 
   // 載入中狀態處理
-  if (newsData.loading || countryLoading) {
+  if (isLoading) {
     return <Loading />;
   }
 
   // 錯誤狀態處理
-  if (newsData.error) {
+  if (errorMessage) {
     return (
       <div className="flex justify-center items-center h-screen text-red-600">
-        Error: {newsData.error}
+        Error: {errorMessage}
       </div>
     );
   }
 
   // 確保有資料才渲染
-  if (!newsData.articles?.length) {
+  if (!topHeadlinesData.articles?.length) {
     return <div>No news available</div>;
   }
 
@@ -153,7 +156,7 @@ function Home() {
             onClick={handleCardClick}
           >
             <img
-              src={newsData.articles[0].urlToImage}
+              src={topHeadlinesData.articles[0].urlToImage}
               alt="urlToImage"
               className={`w-full h-full object-cover transition-transform duration-700 ease-in-out ${
                 isHovered ? "scale-105" : "scale-100"
@@ -162,7 +165,7 @@ function Home() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
               <div className="absolute bottom-6 left-6 right-6">
                 <h1 className="text-3xl font-bold text-white truncate">
-                  {newsData.articles[0].title}
+                  {topHeadlinesData.articles[0].title}
                 </h1>
                 <div>
                   <h2
@@ -170,7 +173,7 @@ function Home() {
                       isHovered ? "opacity-100" : "opacity-0"
                     }`}
                   >
-                    {newsData.articles[0].description}
+                    {topHeadlinesData.articles[0].description}
                   </h2>
                 </div>
               </div>
