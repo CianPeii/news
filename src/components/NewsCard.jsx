@@ -9,9 +9,9 @@ function NewsCard({
   checkedItems,
   onBookmarkToggle,
 }) {
+  const { t } = useTranslation();
   // 檢查是否有新聞數據
   const hasNews = articles?.length > 0;
-  const { t } = useTranslation();
   return (
     <div className="py-4 px-6">
       {/* 國家標題區塊 */}

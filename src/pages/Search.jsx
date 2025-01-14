@@ -8,17 +8,16 @@ import ErrorMessage from "../components/ErrorMessage";
 import { useTranslation } from "react-i18next";
 
 function Search() {
-  const { checkedItems, toggleBookmark } = useBookmarks();
   const { t } = useTranslation();
   const location = useLocation();
-  const keyword = location.state?.keyword || "";
-
   const [newsData, setNewsData] = useState({
     articles: [],
   });
-
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const { checkedItems, toggleBookmark } = useBookmarks();
+
+  const keyword = location.state?.keyword || "";
 
   useEffect(() => {
     const fetchSearchNews = async () => {

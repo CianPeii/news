@@ -18,19 +18,18 @@ import tw from "../assets/images/nation/tw.png";
 
 function Header() {
   const navigate = useNavigate();
-
   const { t, i18n } = useTranslation();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const toggleLanguageMenu = () => {
     setIsLanguageMenuOpen(!isLanguageMenuOpen);
   };
-
-  const [isDark, setIsDark] = useState(false);
 
   // 切換深色模式
   const handleThemeToggle = () => {

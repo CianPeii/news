@@ -9,13 +9,13 @@ import { useTranslation } from "react-i18next";
 function NewsItems({ article, isBookmarked, onBookmarkToggle }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [copied, setCopied] = useState(false);
 
   const handleCardClick = () => {
     navigate(`/article/${encodeURIComponent(article.title)}`, {
       state: { article },
     });
   };
-  const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
     setCopied(true);

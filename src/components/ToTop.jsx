@@ -4,6 +4,13 @@ import { useState, useEffect } from "react";
 function ToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.scrollY > 300) {
@@ -15,13 +22,6 @@ function ToTop() {
 
     window.addEventListener("scroll", toggleVisibility);
   }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
 
   return (
     <div
