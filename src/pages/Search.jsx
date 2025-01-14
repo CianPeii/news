@@ -27,7 +27,6 @@ function Search() {
           articles: response,
         });
         setIsLoading(false);
-        setErrorMessage(null);
       } catch (error) {
         setNewsData({
           articles: [],

@@ -24,9 +24,7 @@ const nations = [
 
 function Home() {
   const { t } = useTranslation();
-
   const [isHovered, setIsHovered] = useState(false);
-
   const [topHeadlinesData, setTopHeadlinesData] = useState({
     articles: [],
   });
@@ -43,7 +41,6 @@ function Home() {
           articles: response.articles,
         });
         setIsLoading(false);
-        setErrorMessage(null);
       } catch (error) {
         setTopHeadlinesData({
           articles: [],
