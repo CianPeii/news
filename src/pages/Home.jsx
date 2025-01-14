@@ -15,9 +15,7 @@ function Home() {
   const { checkedItems, toggleBookmark } = useBookmarks();
 
   const [isHovered, setIsHovered] = useState(false);
-  const [topHeadlinesData, setTopHeadlinesData] = useState({
-    articles: [],
-  });
+  const [topHeadlinesArticles, setTopHeadlinesArticles] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const [countryNewsData, setCountryNewsData] = useState({});
@@ -27,14 +25,10 @@ function Home() {
     const fetchTopHeadlines = async () => {
       try {
         const response = await getTopHeadlines();
-        setTopHeadlinesData({
-          articles: response.articles,
-        });
+        setTopHeadlinesArticles(response.articles);
         setIsLoading(false);
       } catch (error) {
-        setTopHeadlinesData({
-          articles: [],
-        });
+        setTopHeadlinesArticles([]);
         setIsLoading(false);
         setErrorMessage(error.message);
       }
@@ -45,13 +39,13 @@ function Home() {
 
   // 點擊頭條新聞 進入單一新聞頁面
   const handleCardClick = () => {
-    const { articles } = topHeadlinesData;
-    navigate(`/article/${encodeURIComponent(articles[0].title)}`, {
-      state: { article: articles[0] },
+    navigate(`/article/${encodeURIComponent(topHeadlinesArticles[0].title)}`, {
+      state: { article: topHeadlinesArticles[0] },
     });
   };
 
   // 取得各國新聞
+  //TODO:修改
   useEffect(() => {
     const fetchAllCountryNews = async () => {
       setIsLoading(true);
@@ -90,7 +84,7 @@ function Home() {
   }
 
   // 確保有資料才渲染
-  if (!topHeadlinesData.articles?.length) {
+  if (!topHeadlinesArticles?.length) {
     return <div>No news available</div>;
   }
 
@@ -133,7 +127,7 @@ function Home() {
             onClick={handleCardClick}
           >
             <img
-              src={topHeadlinesData.articles[0].urlToImage}
+              src={topHeadlinesArticles[0].urlToImage}
               alt="urlToImage"
               className={`w-full h-full object-cover transition-transform duration-700 ease-in-out ${
                 isHovered ? "scale-105" : "scale-100"
@@ -142,7 +136,7 @@ function Home() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
               <div className="absolute bottom-6 left-6 right-6">
                 <h1 className="text-3xl font-bold text-white truncate">
-                  {topHeadlinesData.articles[0].title}
+                  {topHeadlinesArticles[0].title}
                 </h1>
                 <div>
                   <h2
@@ -150,7 +144,7 @@ function Home() {
                       isHovered ? "opacity-100" : "opacity-0"
                     }`}
                   >
-                    {topHeadlinesData.articles[0].description}
+                    {topHeadlinesArticles[0].description}
                   </h2>
                 </div>
               </div>
