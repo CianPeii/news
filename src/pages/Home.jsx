@@ -3,28 +3,17 @@ import { getTopHeadlines, searchNews } from "../services/newsApi";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 import NewsCard from "../components/NewsCard";
+import useNation from "../hooks/useNation";
 import { useNavigate } from "react-router-dom";
 import { useBookmarks } from "../hooks/useBookmarks";
 import { useTranslation } from "react-i18next";
 
-// 導入國家圖標
-import us from "../assets/images/nation/us.png";
-import ch from "../assets/images/nation/ch.png";
-import de from "../assets/images/nation/de.png";
-import tw from "../assets/images/nation/tw.png";
-import jp from "../assets/images/nation/jp.png";
-
-// 國家設定
-const nations = [
-  { id: "us", nation: "USA", flagUrl: us },
-  { id: "ch", nation: "Switzerland", flagUrl: ch },
-  { id: "de", nation: "Germany", flagUrl: de },
-  { id: "tw", nation: "Taiwan", flagUrl: tw },
-  { id: "jp", nation: "Japan", flagUrl: jp },
-];
-
 function Home() {
   const { t } = useTranslation();
+  const { nations } = useNation();
+  const navigate = useNavigate();
+  const { checkedItems, toggleBookmark } = useBookmarks();
+
   const [isHovered, setIsHovered] = useState(false);
   const [topHeadlinesData, setTopHeadlinesData] = useState({
     articles: [],
@@ -55,7 +44,6 @@ function Home() {
   }, []);
 
   // 點擊頭條新聞 進入單一新聞頁面
-  const navigate = useNavigate();
   const handleCardClick = () => {
     const { articles } = topHeadlinesData;
     navigate(`/article/${encodeURIComponent(articles[0].title)}`, {
@@ -92,9 +80,6 @@ function Home() {
 
     fetchAllCountryNews();
   }, []);
-
-  // 書籤功能
-  const { checkedItems, toggleBookmark } = useBookmarks();
 
   if (isLoading) {
     return <Loading />;
