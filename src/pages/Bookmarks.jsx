@@ -16,7 +16,7 @@ const Bookmarks = () => {
           {Object.entries(checkedItems).map(([url, bookmarkData]) => {
             const { article } = bookmarkData;
 
-            if (!article || !article.url) return null; // 確保數據完整性
+            if (!article || !article.url) return null;
 
             return (
               <NewsItems
@@ -51,7 +51,6 @@ const Bookmarks = () => {
     );
   };
 
-  // 3. 主要的渲染結構
   return <>{renderContent()}</>;
 };
 

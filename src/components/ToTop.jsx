@@ -16,7 +16,6 @@ function ToTop() {
     window.addEventListener("scroll", toggleVisibility);
   }, []);
 
-  // 平滑滾動到頂部
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
