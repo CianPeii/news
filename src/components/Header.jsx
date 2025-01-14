@@ -18,6 +18,7 @@ import tw from "../assets/images/nation/tw.png";
 
 function Header() {
   const navigate = useNavigate();
+
   const { t, i18n } = useTranslation();
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -28,7 +29,7 @@ function Header() {
   const toggleLanguageMenu = () => {
     setIsLanguageMenuOpen(!isLanguageMenuOpen);
   };
-  //TODO:怎用
+
   const [isDark, setIsDark] = useState(false);
 
   // 切換深色模式
