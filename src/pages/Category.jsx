@@ -1,12 +1,12 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import NewsItems from "../components/NewsItems";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 import { getCategoryNews } from "../services/newsApi";
 import { useBookmarks } from "../hooks/useBookmarks";
-
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { useCategory } from "../hooks/useCategory";
 
 function Category() {
@@ -15,9 +15,7 @@ function Category() {
   const { t } = useTranslation();
   const { categories } = useCategory();
 
-  const [newsData, setNewsData] = useState({
-    articles: [],
-  });
+  const [newsData, setNewsData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -27,16 +25,11 @@ function Category() {
     const fetchCategoryNews = async () => {
       try {
         const response = await getCategoryNews(category);
-        setNewsData({
-          articles: response,
-        });
-        setIsLoading(false);
+        setNewsData(response);
       } catch (error) {
-        setNewsData({
-          articles: [],
-        });
-        setIsLoading(false);
         setErrorMessage(error.message);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -72,15 +65,18 @@ function Category() {
         <div className=" py-6 px-8">
           {/* 新聞卡片 */}
           <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-4 px-6">
-            {newsData.articles.map((article) =>
-              article.author !== null ? (
-                <NewsItems
-                  key={article.url}
-                  article={article}
-                  isBookmarked={checkedItems[article.url]?.isBookmarked}
-                  onBookmarkToggle={() => toggleBookmark(article.url, article)}
-                />
-              ) : null
+            {newsData.map(
+              (article) =>
+                article.author && (
+                  <NewsItems
+                    key={article.url}
+                    article={article}
+                    isBookmarked={checkedItems[article.url]?.isBookmarked}
+                    onBookmarkToggle={() =>
+                      toggleBookmark(article.url, article)
+                    }
+                  />
+                )
             )}
           </div>
         </div>

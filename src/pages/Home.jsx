@@ -15,27 +15,10 @@ function Home() {
   const { checkedItems, toggleBookmark } = useBookmarks();
 
   const [isHovered, setIsHovered] = useState(false);
-  const [topHeadlinesArticles, setTopHeadlinesArticles] = useState();
+  const [topHeadlinesArticles, setTopHeadlinesArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const [countryNewsData, setCountryNewsData] = useState({});
-
-  // 取得頭條新聞
-  useEffect(() => {
-    const fetchTopHeadlines = async () => {
-      try {
-        const response = await getTopHeadlines();
-        setTopHeadlinesArticles(response.articles);
-        setIsLoading(false);
-      } catch (error) {
-        setTopHeadlinesArticles([]);
-        setIsLoading(false);
-        setErrorMessage(error.message);
-      }
-    };
-
-    fetchTopHeadlines();
-  }, []);
 
   // 點擊頭條新聞 進入單一新聞頁面
   const handleCardClick = () => {
@@ -43,6 +26,22 @@ function Home() {
       state: { article: topHeadlinesArticles[0] },
     });
   };
+
+  // 取得頭條新聞
+  useEffect(() => {
+    const fetchTopHeadlines = async () => {
+      try {
+        const response = await getTopHeadlines();
+        setTopHeadlinesArticles(response.articles);
+      } catch (error) {
+        setErrorMessage(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchTopHeadlines();
+  }, []);
 
   // 取得各國新聞
   useEffect(() => {
@@ -66,7 +65,7 @@ function Home() {
 
         setCountryNewsData(countryNewsObject);
       } catch (error) {
-        console.error("取得各國新聞時發生錯誤:", error);
+        setErrorMessage("取得各國新聞時發生錯誤:", error);
       } finally {
         setIsLoading(false);
       }
