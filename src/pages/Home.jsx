@@ -45,10 +45,10 @@ function Home() {
   };
 
   // 取得各國新聞
-  //TODO:修改
   useEffect(() => {
     const fetchAllCountryNews = async () => {
       setIsLoading(true);
+
       try {
         const newsPromises = nations.map(async ({ nation }) => {
           const articles = await searchNews(nation);
@@ -73,7 +73,7 @@ function Home() {
     };
 
     fetchAllCountryNews();
-  }, []);
+  }, [nations]);
 
   if (isLoading) {
     return <Loading />;
