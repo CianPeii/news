@@ -2,15 +2,6 @@
 
 一個使用 React 和 Vite 建立的新聞網站專案，提供直覺的操作界面與全面的閱讀體驗。
 
-#### 使用技術
-
-- React
-- Vite
-- Tailwind
-- React Router
-- Axios
-- React i18n
-
 #### 主要功能
 
 - 熱門新聞
@@ -28,6 +19,15 @@
 - 深色模式
   ![dark-mode](demo/dark-mode.gif)
 - RWD 響應式網站
+
+#### 使用技術
+
+- React
+- Vite
+- Tailwind
+- React Router
+- Axios
+- React i18n
 
 #### 安裝與執行
 
